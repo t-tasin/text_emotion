@@ -48,13 +48,15 @@ def display_results(model, text):
     st.write(text)
 
     st.success("Prediction")
-    # Use the model's classes to get the appropriate emoji
     emoji_icon = emotions_emoji_dict.get(prediction, "")
     st.write(f"{prediction}: {emoji_icon}")
-    st.write(f"Confidence: {np.max(probability)}")
+    
+    # Calculate and format the confidence as a percentage
+    confidence_fraction = np.max(probability)
+    confidence_percentage = confidence_fraction * 100
+    st.write(f"Confidence: {confidence_fraction:.4f} ({confidence_percentage:.2f}%)")
 
     st.success("Prediction Probability")
-    # Adjust the DataFrame creation to use the model's classes directly
     proba_df = pd.DataFrame(probability, columns=model.classes_)
     proba_df_clean = proba_df.T.reset_index()
     proba_df_clean.columns = ["emotions", "probability"]
@@ -63,6 +65,7 @@ def display_results(model, text):
         x='emotions', y='probability', color='emotions'
     )
     st.altair_chart(fig, use_container_width=True)
+
 
 if __name__ == '__main__':
     main()
