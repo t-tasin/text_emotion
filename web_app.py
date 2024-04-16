@@ -33,11 +33,11 @@ def main():
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown("### Model 1 Results")
+            st.markdown("### 6 Parameter Model Results")
             display_results(pipe_lr1, raw_text)
 
         with col2:
-            st.markdown("### Model 2 Results")
+            st.markdown("### 13 Parameter Model Results")
             display_results(pipe_lr2, raw_text)
 
 def display_results(model, text):
